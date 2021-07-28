@@ -43,6 +43,7 @@ class Plotter:
     @author: Andrej Schwanke
     """
     def pairplot(self, data, title=None):
+        plt.figure()
         plot = sns.pairplot(data)
         if title:
             plot.fig.subplots_adjust(top=0.9)
@@ -50,7 +51,6 @@ class Plotter:
 
         if self.save_plots: 
             self.save_plot(plot, "pairplot")
-        plt.clf()
 
        
     """
@@ -58,13 +58,14 @@ class Plotter:
     @author: Andrej Schwanke
     """
     def scatterplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.scatterplot(x,y,data=data,legend="full") 
         if title:
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "scatterplot")
-        plt.clf()
+
     
 
     """
@@ -72,19 +73,21 @@ class Plotter:
     @author: Andrej Schwanke
     """
     def lineplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.lineplot(x,y, data=data)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "lineplot")
-        plt.clf()
+
 
     """
     Create lineplot of given data
     @author: Andrej Schwanke
     """
     def catplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.catplot(x,y, data=data)
         if title: 
             plot.fig.subplots_adjust(top=0.9)
@@ -92,20 +95,20 @@ class Plotter:
 
         if self.save_plots:
             self.save_plot(plot, "catplot")
-        plt.clf()
+
 
     """
     Create stripplot of given data
     @author: Andrej Schwanke
     """
     def stripplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.stripplot(x,y, data=data, jitter = 0.2)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "stripplot")
-        plt.clf()
 
 
     """
@@ -113,13 +116,13 @@ class Plotter:
     @author: Andrej Schwanke
     """
     def swarmplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.swarmplot(x,y, data=data)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "swarmplot")
-        plt.clf()
 
 
     """
@@ -127,26 +130,28 @@ class Plotter:
     @author: Andrej Schwanke
     """
     def violinplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.violinplot(x,y, data=data)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "violinplot")
-        plt.clf()
+
 
     """
     Create boxplot of given data
     @author: Andrej Schwanke
     """
     def boxplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.boxplot(x,y, data=data)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "boxplot")
-        plt.clf()
+
 
 
     """
@@ -154,39 +159,42 @@ class Plotter:
     @author: Andrej Schwanke
     """
     def boxenplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.boxenplot(x,y, data=data)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "boxenplot")
-        plt.clf()
+
 
     """
     Create countplot of given data
     @author: Andrej Schwanke
     """
     def countplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.countplot(x,y, data=data)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "countplot")
-        plt.clf()
+
 
     """
     Create barplot of given data
     @author: Andrej Schwanke
     """
     def barplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.barplot(x,y, data=data)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "barplot")
-        plt.clf()
+
 
 
     """
@@ -194,13 +202,14 @@ class Plotter:
     @author: Andrej Schwanke
     """
     def pointplot(self, data, x=None, y=None, title=None):
+        plt.figure()
         plot = sns.pointplot(x,y, data=data)
         if title: 
             plot.set_title(title)
 
         if self.save_plots:
             self.save_plot(plot.get_figure(), "pointplot")
-        plt.clf()
+
 
     """
     This method provide a oppertunity to save a pandas dataframe
@@ -234,6 +243,8 @@ class Plotter:
         else: 
             plot.savefig(path) 
       
+    def show(self):
+        plt.show()
 
 if __name__ == "__main__":
     plotter = Plotter(save_plots=True, format="png")
@@ -255,3 +266,5 @@ if __name__ == "__main__":
     plotter.countplot(dataset_2, y="sex")
     plotter.barplot(dataset_2, y="total_bill", x="sex")
     plotter.pointplot(dataset_2, y="total_bill", x="tip")
+
+    plotter.show()
