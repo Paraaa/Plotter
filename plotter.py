@@ -246,24 +246,3 @@ class Plotter:
     def show(self):
         plt.show()
 
-if __name__ == "__main__":
-    plotter = Plotter(save_plots=True, format="png")
-
-    #dataset = pd.read_csv("./dataset/data.csv")
-    dataset = sns.load_dataset("iris")
-    dataset_2 = sns.load_dataset("tips")
-
-    #plotter.export_table_as_png(dataset_2)
-    #plotter.pairplot(dataset, title="pairplot")
-    #plotter.scatterplot(dataset_2,title="Test123", x = "total_bill", y ="tip")
-    #plotter.lineplot(dataset_2,title="lineplot", x="tip" , y="total_bill")
-    #plotter.catplot(dataset_2, title="catplot", x = "tip", y ="sex")
-    #plotter.stripplot(dataset_2, title="stripplot", x = "tip", y ="sex")
-    #plotter.swarmplot(dataset_2, title="swarmplot", x = "tip", y ="sex")
-    #plotter.violinplot(dataset_2, title="violinplot", x="total_bill")
-    #plotter.boxplot(dataset_2, title="boxplot")
-    #plotter.boxenplot(dataset_2, title="boxenplot", y="tip")
-    #plotter.countplot(dataset_2,title="countplot", y="sex")
-    #plotter.barplot(dataset_2,title="barplot", y="total_bill", x="sex")
-    #plotter.pointplot(dataset_2,title="pointplot", y="total_bill", x="tip")
-    #plotter.show()
