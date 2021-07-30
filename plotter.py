@@ -308,7 +308,7 @@ class Plotter:
     Method to remove outliers with IQR
     Source: https://www.kaggle.com/abdullaahmed/house-price-prediction-linear-regression
     """
-    def remove_outliers(df, x, lower_bound=25, upper_bound=75):
+    def remove_outliers(self, df, x, lower_bound=25, upper_bound=75):
         q25, q75 = np.percentile(df[x], lower_bound), np.percentile(df[x], upper_bound)
         iqr = q75 - q25
         cut_off = iqr * 1.5
