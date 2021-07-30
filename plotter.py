@@ -27,14 +27,10 @@ class Plotter:
     """
     def __init__(self, save_plots=False, path="./plots/", format="svg"):
         sns.set_style("darkgrid")
-        plt.rcParams["figure.figsize"] = (8, 4)
-        plt.rcParams["xtick.labelsize"] = 7
         self.save_plots = save_plots
         self.path = path
         self.format = format
-        
-
-
+    
         if self.save_plots: 
             try: 
                 os.mkdir(self.path) 
