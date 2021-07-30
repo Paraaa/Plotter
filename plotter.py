@@ -27,10 +27,14 @@ class Plotter:
     """
     def __init__(self, save_plots=False, path="./plots/", format="svg"):
         sns.set_style("darkgrid")
+        plt.rcParams["figure.figsize"] = (8, 4)
+        plt.rcParams["xtick.labelsize"] = 7
         self.save_plots = save_plots
         self.path = path
         self.format = format
         
+
+
         if self.save_plots: 
             try: 
                 os.mkdir(self.path) 
@@ -210,6 +214,65 @@ class Plotter:
         if self.save_plots:
             self.save_plot(plot.get_figure(), "pointplot")
 
+    """
+    Create lmplot of given data
+    (plots a linear model)
+    @author: Andrej Schwanke
+    """
+    def lmplot(self, data, x=None, y=None, title=None): 
+        plot = sns.lmplot(x, y, data=data)
+        if title:
+            plot.fig.subplots_adjust(top=0.9)
+            plot.fig.suptitle(title)
+
+        if self.save_plots: 
+            self.save_plot(plot,"lmplot")
+
+
+    """
+    Creates plots of all features on the x axes 
+    and the label on the y axes.
+    It uses an lmplot to fit a linear model in the data.
+    Therefor only columns of dtype: int64, int32 or float64
+    can be used to generate the plots.
+    @author: Andrej Schwanke
+    """
+    def regression_plot(self, data, label):        
+        for column in data.columns:
+            if((data[column].dtype == np.int64) or 
+               (data[column].dtype == np.int32) or
+               (data[column].dtype == np.float64)):
+                self.lmplot(data, x=column, y = label, title=f"{label}:{column}")
+
+    """
+    Counts the given unique values in the dataframe.
+    and plots them into a countplot.
+    @author: Andrej Schwanke    
+    """
+    def count_unique_plot(self, data):
+        for column in data.columns:
+            self.countplot(data,x=column)
+
+    """
+    Creates a correlation heatmap based on pased data.
+    @author: Andrej Schwanke
+    """
+    def correlation_heatmap(self, data, title=None):
+        plt.figure()
+        plot = sns.heatmap(data.corr(),annot=True)
+        if title:
+            plot.set_title(title)
+        if self.save_plots:
+            self.save_plot(plot.get_figure(), "correlation-heatmap")
+
+
+    """
+    Creates a boxplot for each column in the dataset
+    @author: Andrej Schwanke
+    """
+    def show_outliers(self, data, title=None):
+        for column in data.columns:
+            self.boxplot(data, x=column)
 
     """
     This method provide a oppertunity to save a pandas dataframe
@@ -242,7 +305,11 @@ class Plotter:
             dfi.export(plot, path)
         else: 
             plot.savefig(path) 
-      
+
+
+
+
     def show(self):
+        plt.tight_layout()
         plt.show()
 
